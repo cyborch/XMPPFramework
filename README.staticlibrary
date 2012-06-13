@@ -1,0 +1,9 @@
+Steps to add this static library XCode project to your iOS app:
+
+1. Add the XMPPFramework project as a subproject to your app.
+2. In your app, in build phases, make sure XMPPFramework is a target dependency.
+3. In your app, in build phases, make sure libXMPPFramework will be linked into your binary.
+4. Add libxml2.dylib, libresolv.dylib, CFNetwork.framework, and Security.framework to the libraries to be linked in.
+5. add ${PROJECT_DIR}/../XMPPFramework/ (recursive) to your User Header Search Paths. Note that you may have to tweak the path based on where you've put the XMPPFramework xcode project in relation to your main app xcode project.
+6. add /usr/include/libxml2 to your User Header Search Paths
+7. add -ObjC to your app's linker flags.  this makes sure that the files which contain only categories in the XMPPFramework static library get compiled.  depending on your xcode version, you may need to use the -all_load or -force_load flags.  YMMV.  see https://developer.apple.com/library/mac/#qa/qa2006/qa1490.html and http://stackoverflow.com/questions/932856/calling-method-on-category-included-from-iphone-static-library-causes-nsinvalida for more info.
