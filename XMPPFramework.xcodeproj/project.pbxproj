@@ -19,6 +19,8 @@
 		D61EF12815A619AE00A9404B /* DDXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = D61EF11B15A619AE00A9404B /* DDXMLNode.h */; };
 		D61EF12915A619AE00A9404B /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D61EF11C15A619AE00A9404B /* DDXMLNode.m */; };
 		D61EF12A15A619AE00A9404B /* DDXMLPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D61EF11E15A619AE00A9404B /* DDXMLPrivate.h */; };
+		D6DC08BF160A62B300CF7D31 /* idn-int.h in Headers */ = {isa = PBXBuildFile; fileRef = D6DC08BD160A62B300CF7D31 /* idn-int.h */; };
+		D6DC08C0160A62B300CF7D31 /* stringprep.h in Headers */ = {isa = PBXBuildFile; fileRef = D6DC08BE160A62B300CF7D31 /* stringprep.h */; };
 		FA0EA20215894F2F006AF4D2 /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD67C751587F3FD0035A6E6 /* libidn.a */; };
 		FAD67B6C1587EE130035A6E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD67B6B1587EE130035A6E6 /* Foundation.framework */; };
 		FAD67C2F1587F0950035A6E6 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = FAD67C1F1587F0950035A6E6 /* DDAbstractDatabaseLogger.h */; };
@@ -40,8 +42,6 @@
 		FAD67C511587F28D0035A6E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD67C501587F28D0035A6E6 /* UIKit.framework */; };
 		FAD67C531587F2960035A6E6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD67C521587F2960035A6E6 /* CFNetwork.framework */; };
 		FAD67C551587F29E0035A6E6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD67C541587F29E0035A6E6 /* Security.framework */; };
-		FAD67C771587F3FD0035A6E6 /* idn-int.h in Headers */ = {isa = PBXBuildFile; fileRef = FAD67C741587F3FD0035A6E6 /* idn-int.h */; };
-		FAD67C7A1587F3FD0035A6E6 /* stringprep.h in Headers */ = {isa = PBXBuildFile; fileRef = FAD67C761587F3FD0035A6E6 /* stringprep.h */; };
 		FAD67C981587F4A70035A6E6 /* XMPPElement.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD67C7E1587F4630035A6E6 /* XMPPElement.m */; };
 		FAD67C991587F4A70035A6E6 /* XMPPIQ.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD67C821587F4630035A6E6 /* XMPPIQ.m */; };
 		FAD67C9A1587F4A70035A6E6 /* XMPPJID.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD67C841587F4630035A6E6 /* XMPPJID.m */; };
@@ -96,6 +96,8 @@
 		D61EF11B15A619AE00A9404B /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
 		D61EF11C15A619AE00A9404B /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
 		D61EF11E15A619AE00A9404B /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		D6DC08BD160A62B300CF7D31 /* idn-int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "idn-int.h"; path = "Vendor/libidn/idn-int.h"; sourceTree = SOURCE_ROOT; };
+		D6DC08BE160A62B300CF7D31 /* stringprep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringprep.h; path = Vendor/libidn/stringprep.h; sourceTree = SOURCE_ROOT; };
 		FAD67B681587EE130035A6E6 /* libXMPPFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libXMPPFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD67B6B1587EE130035A6E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FAD67B6F1587EE130035A6E6 /* XMPPFramework-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "XMPPFramework-Prefix.pch"; path = "libXMPPFramework/XMPPFramework-Prefix.pch"; sourceTree = "<group>"; };
@@ -121,9 +123,7 @@
 		FAD67C521587F2960035A6E6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		FAD67C541587F29E0035A6E6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FAD67C711587F32C0035A6E6 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		FAD67C741587F3FD0035A6E6 /* idn-int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "idn-int.h"; path = "Vendor/libidn/idn-int.h"; sourceTree = SOURCE_ROOT; };
 		FAD67C751587F3FD0035A6E6 /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libidn.a; path = Vendor/libidn/libidn.a; sourceTree = SOURCE_ROOT; };
-		FAD67C761587F3FD0035A6E6 /* stringprep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringprep.h; path = Vendor/libidn/stringprep.h; sourceTree = SOURCE_ROOT; };
 		FAD67C7C1587F4630035A6E6 /* XMPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPP.h; path = Core/XMPP.h; sourceTree = SOURCE_ROOT; };
 		FAD67C7D1587F4630035A6E6 /* XMPPElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPElement.h; path = Core/XMPPElement.h; sourceTree = SOURCE_ROOT; };
 		FAD67C7E1587F4630035A6E6 /* XMPPElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPElement.m; path = Core/XMPPElement.m; sourceTree = SOURCE_ROOT; };
@@ -197,6 +197,7 @@
 		D61EF10F15A619AE00A9404B /* KissXML */ = {
 			isa = PBXGroup;
 			children = (
+				D6DC08BC160A629800CF7D31 /* LibIDN */,
 				D61EF11015A619AE00A9404B /* Additions */,
 				D61EF11315A619AE00A9404B /* Categories */,
 				D61EF11615A619AE00A9404B /* DDXML.h */,
@@ -236,6 +237,15 @@
 				D61EF11E15A619AE00A9404B /* DDXMLPrivate.h */,
 			);
 			path = Private;
+			sourceTree = "<group>";
+		};
+		D6DC08BC160A629800CF7D31 /* LibIDN */ = {
+			isa = PBXGroup;
+			children = (
+				D6DC08BD160A62B300CF7D31 /* idn-int.h */,
+				D6DC08BE160A62B300CF7D31 /* stringprep.h */,
+			);
+			name = LibIDN;
 			sourceTree = "<group>";
 		};
 		FAD67B5D1587EE130035A6E6 = {
@@ -335,21 +345,11 @@
 		FAD67C4F1587F2020035A6E6 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				FAD67C731587F3F20035A6E6 /* libidn */,
 				D61EF10F15A619AE00A9404B /* KissXML */,
 				FAD67C491587F1FB0035A6E6 /* CocoaAsyncSocket */,
 				FAD67C1E1587F0950035A6E6 /* CocoaLumberjack */,
 			);
 			name = Vendor;
-			sourceTree = "<group>";
-		};
-		FAD67C731587F3F20035A6E6 /* libidn */ = {
-			isa = PBXGroup;
-			children = (
-				FAD67C741587F3FD0035A6E6 /* idn-int.h */,
-				FAD67C761587F3FD0035A6E6 /* stringprep.h */,
-			);
-			name = libidn;
 			sourceTree = "<group>";
 		};
 		FAD67C7B1587F4630035A6E6 /* Core */ = {
@@ -494,8 +494,6 @@
 				FAD67C3E1587F0950035A6E6 /* ContextFilterLogFormatter.h in Headers */,
 				FAD67C411587F0950035A6E6 /* DispatchQueueLogFormatter.h in Headers */,
 				FAD67C4C1587F1FB0035A6E6 /* GCDAsyncSocket.h in Headers */,
-				FAD67C771587F3FD0035A6E6 /* idn-int.h in Headers */,
-				FAD67C7A1587F3FD0035A6E6 /* stringprep.h in Headers */,
 				FAD67CA71587F4D60035A6E6 /* NSData+XMPP.h in Headers */,
 				FAD67CAA1587F4D60035A6E6 /* NSNumber+XMPP.h in Headers */,
 				FAD67CAD1587F4D60035A6E6 /* NSXMLElement+XMPP.h in Headers */,
@@ -519,6 +517,8 @@
 				D61EF12615A619AE00A9404B /* DDXMLElement.h in Headers */,
 				D61EF12815A619AE00A9404B /* DDXMLNode.h in Headers */,
 				D61EF12A15A619AE00A9404B /* DDXMLPrivate.h in Headers */,
+				D6DC08BF160A62B300CF7D31 /* idn-int.h in Headers */,
+				D6DC08C0160A62B300CF7D31 /* stringprep.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
