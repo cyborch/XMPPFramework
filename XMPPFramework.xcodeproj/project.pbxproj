@@ -19,9 +19,9 @@
 		D61EF12815A619AE00A9404B /* DDXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = D61EF11B15A619AE00A9404B /* DDXMLNode.h */; };
 		D61EF12915A619AE00A9404B /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D61EF11C15A619AE00A9404B /* DDXMLNode.m */; };
 		D61EF12A15A619AE00A9404B /* DDXMLPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D61EF11E15A619AE00A9404B /* DDXMLPrivate.h */; };
+		D68F7087161FC9A7009943A5 /* libidnkitlite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D68F7086161FC9A7009943A5 /* libidnkitlite.a */; };
 		D6DC08BF160A62B300CF7D31 /* idn-int.h in Headers */ = {isa = PBXBuildFile; fileRef = D6DC08BD160A62B300CF7D31 /* idn-int.h */; };
 		D6DC08C0160A62B300CF7D31 /* stringprep.h in Headers */ = {isa = PBXBuildFile; fileRef = D6DC08BE160A62B300CF7D31 /* stringprep.h */; };
-		FA0EA20215894F2F006AF4D2 /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD67C751587F3FD0035A6E6 /* libidn.a */; };
 		FAD67B6C1587EE130035A6E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD67B6B1587EE130035A6E6 /* Foundation.framework */; };
 		FAD67C2F1587F0950035A6E6 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = FAD67C1F1587F0950035A6E6 /* DDAbstractDatabaseLogger.h */; };
 		FAD67C301587F0950035A6E6 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD67C201587F0950035A6E6 /* DDAbstractDatabaseLogger.m */; };
@@ -96,6 +96,7 @@
 		D61EF11B15A619AE00A9404B /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
 		D61EF11C15A619AE00A9404B /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
 		D61EF11E15A619AE00A9404B /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		D68F7086161FC9A7009943A5 /* libidnkitlite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libidnkitlite.a; path = Vendor/libidnkitlite.a; sourceTree = "<group>"; };
 		D6DC08BD160A62B300CF7D31 /* idn-int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "idn-int.h"; path = "Vendor/libidn/idn-int.h"; sourceTree = SOURCE_ROOT; };
 		D6DC08BE160A62B300CF7D31 /* stringprep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringprep.h; path = Vendor/libidn/stringprep.h; sourceTree = SOURCE_ROOT; };
 		FAD67B681587EE130035A6E6 /* libXMPPFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libXMPPFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,7 +124,6 @@
 		FAD67C521587F2960035A6E6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		FAD67C541587F29E0035A6E6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FAD67C711587F32C0035A6E6 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		FAD67C751587F3FD0035A6E6 /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libidn.a; path = Vendor/libidn/libidn.a; sourceTree = SOURCE_ROOT; };
 		FAD67C7C1587F4630035A6E6 /* XMPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPP.h; path = Core/XMPP.h; sourceTree = SOURCE_ROOT; };
 		FAD67C7D1587F4630035A6E6 /* XMPPElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPElement.h; path = Core/XMPPElement.h; sourceTree = SOURCE_ROOT; };
 		FAD67C7E1587F4630035A6E6 /* XMPPElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPElement.m; path = Core/XMPPElement.m; sourceTree = SOURCE_ROOT; };
@@ -183,11 +183,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D68F7087161FC9A7009943A5 /* libidnkitlite.a in Frameworks */,
 				FAD67C551587F29E0035A6E6 /* Security.framework in Frameworks */,
 				FAD67C531587F2960035A6E6 /* CFNetwork.framework in Frameworks */,
 				FAD67C511587F28D0035A6E6 /* UIKit.framework in Frameworks */,
 				FAD67B6C1587EE130035A6E6 /* Foundation.framework in Frameworks */,
-				FA0EA20215894F2F006AF4D2 /* libidn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,9 +269,9 @@
 		FAD67B6A1587EE130035A6E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D68F7086161FC9A7009943A5 /* libidnkitlite.a */,
 				FAD67CF61587F56B0035A6E6 /* libresolv.dylib */,
 				FAD67C711587F32C0035A6E6 /* libxml2.dylib */,
-				FAD67C751587F3FD0035A6E6 /* libidn.a */,
 				FAD67C541587F29E0035A6E6 /* Security.framework */,
 				FAD67C521587F2960035A6E6 /* CFNetwork.framework */,
 				FAD67C501587F28D0035A6E6 /* UIKit.framework */,
@@ -665,10 +665,16 @@
 				DSTROOT = /tmp/XMPPFramework.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "libXMPPFramework/XMPPFramework-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"$(PROJECT_DIR)/Vendor/include",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Vendor/libidn\"",
+					"\"$(SRCROOT)/Vendor\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -685,10 +691,16 @@
 				DSTROOT = /tmp/XMPPFramework.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "libXMPPFramework/XMPPFramework-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"$(PROJECT_DIR)/Vendor/include",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Vendor/libidn\"",
+					"\"$(SRCROOT)/Vendor\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
