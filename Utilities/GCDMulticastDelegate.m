@@ -98,47 +98,53 @@
 	
 	GCDMulticastDelegateNode *node =
 	    [[GCDMulticastDelegateNode alloc] initWithDelegate:delegate delegateQueue:delegateQueue];
-	
-	[delegateNodes addObject:node];
+
+	@synchronized (delegateNodes)
+    {
+        [delegateNodes addObject:node];
+    }
 }
 
 - (void)removeDelegate:(id)delegate delegateQueue:(dispatch_queue_t)delegateQueue
 {
 	if (delegate == nil) return;
 	
-	NSUInteger i;
-	for (i = [delegateNodes count]; i > 0; i--)
-	{
-		GCDMulticastDelegateNode *node = [delegateNodes objectAtIndex:(i-1)];
-		
-		id nodeDelegate = node.delegate;
-		#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
-		if (nodeDelegate == [NSNull null])
-			nodeDelegate = node.unsafeDelegate;
-		#endif
-		
-		if (delegate == nodeDelegate)
-		{
-			if ((delegateQueue == NULL) || (delegateQueue == node.delegateQueue))
-			{
-				// Recall that this node may be retained by a GCDMulticastDelegateEnumerator.
-				// The enumerator is a thread-safe snapshot of the delegate list at the moment it was created.
-				// To properly remove this node from list, and from the list(s) of any enumerators,
-				// we nullify the delegate via the atomic property.
-				// 
-				// However, the delegateQueue is not modified.
-				// The thread-safety is hinged on the atomic delegate property.
-				// The delegateQueue is expected to properly exist until the node is deallocated.
-				
-				node.delegate = nil;
-				#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
-				node.unsafeDelegate = nil;
-				#endif
-				
-				[delegateNodes removeObjectAtIndex:(i-1)];
-			}
-		}
-	}
+    @synchronized (delegateNodes)
+    {
+        NSUInteger i;
+        for (i = [delegateNodes count]; i > 0; i--)
+        {
+            GCDMulticastDelegateNode *node = [delegateNodes objectAtIndex:(i-1)];
+            
+            id nodeDelegate = node.delegate;
+#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
+            if (nodeDelegate == [NSNull null])
+                nodeDelegate = node.unsafeDelegate;
+#endif
+            
+            if (delegate == nodeDelegate)
+            {
+                if ((delegateQueue == NULL) || (delegateQueue == node.delegateQueue))
+                {
+                    // Recall that this node may be retained by a GCDMulticastDelegateEnumerator.
+                    // The enumerator is a thread-safe snapshot of the delegate list at the moment it was created.
+                    // To properly remove this node from list, and from the list(s) of any enumerators,
+                    // we nullify the delegate via the atomic property.
+                    //
+                    // However, the delegateQueue is not modified.
+                    // The thread-safety is hinged on the atomic delegate property.
+                    // The delegateQueue is expected to properly exist until the node is deallocated.
+                    
+                    node.delegate = nil;
+#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
+                    node.unsafeDelegate = nil;
+#endif
+                    
+                    [delegateNodes removeObjectAtIndex:(i-1)];
+                }
+            }
+        }
+    }
 }
 
 - (void)removeDelegate:(id)delegate
@@ -148,39 +154,48 @@
 
 - (void)removeAllDelegates
 {
-	for (GCDMulticastDelegateNode *node in delegateNodes)
-	{
-		node.delegate = nil;
-		#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
-		node.unsafeDelegate = nil;
-		#endif
-	}
-	
-	[delegateNodes removeAllObjects];
+	@synchronized (delegateNodes)
+    {
+        for (GCDMulticastDelegateNode *node in delegateNodes)
+        {
+            node.delegate = nil;
+#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
+            node.unsafeDelegate = nil;
+#endif
+        }
+        
+        [delegateNodes removeAllObjects];
+    }
 }
 
 - (NSUInteger)count
 {
-	return [delegateNodes count];
+	@synchronized (delegateNodes)
+    {
+        return [delegateNodes count];
+    }
 }
 
 - (NSUInteger)countOfClass:(Class)aClass
 {
 	NSUInteger count = 0;
-	
-	for (GCDMulticastDelegateNode *node in delegateNodes)
-	{
-		id nodeDelegate = node.delegate;
-		#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
-		if (nodeDelegate == [NSNull null])
-			nodeDelegate = node.unsafeDelegate;
-		#endif
-		
-		if ([nodeDelegate isKindOfClass:aClass])
-		{
-			count++;
-		}
-	}
+
+	@synchronized (delegateNodes)
+    {
+        for (GCDMulticastDelegateNode *node in delegateNodes)
+        {
+            id nodeDelegate = node.delegate;
+#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
+            if (nodeDelegate == [NSNull null])
+                nodeDelegate = node.unsafeDelegate;
+#endif
+            
+            if ([nodeDelegate isKindOfClass:aClass])
+            {
+                count++;
+            }
+        }
+    }
 	
 	return count;
 }
@@ -189,31 +204,42 @@
 {
 	NSUInteger count = 0;
 	
-	for (GCDMulticastDelegateNode *node in delegateNodes)
-	{
-		id nodeDelegate = node.delegate;
-		#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
-		if (nodeDelegate == [NSNull null])
-			nodeDelegate = node.unsafeDelegate;
-		#endif
-		
-		if ([nodeDelegate respondsToSelector:aSelector])
-		{
-			count++;
-		}
-	}
+	@synchronized (delegateNodes)
+    {
+        for (GCDMulticastDelegateNode *node in delegateNodes)
+        {
+            id nodeDelegate = node.delegate;
+#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
+            if (nodeDelegate == [NSNull null])
+                nodeDelegate = node.unsafeDelegate;
+#endif
+            
+            if ([nodeDelegate respondsToSelector:aSelector])
+            {
+                count++;
+            }
+        }
+    }
 	
 	return count;
 }
 
 - (GCDMulticastDelegateEnumerator *)delegateEnumerator
 {
-	return [[GCDMulticastDelegateEnumerator alloc] initFromDelegateNodes:delegateNodes];
+	@synchronized (delegateNodes)
+    {
+        return [[GCDMulticastDelegateEnumerator alloc] initFromDelegateNodes:delegateNodes];
+    }
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
 {
-	for (GCDMulticastDelegateNode *node in delegateNodes)
+    NSArray *nodes;
+	@synchronized (delegateNodes)
+    {
+        nodes = [delegateNodes copy];
+    }
+	for (GCDMulticastDelegateNode *node in nodes)
 	{
 		id nodeDelegate = node.delegate;
 		#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
@@ -243,7 +269,12 @@
 	SEL selector = [origInvocation selector];
 	BOOL foundNilDelegate = NO;
 	
-	for (GCDMulticastDelegateNode *node in delegateNodes)
+    NSArray *nodes;
+	@synchronized (delegateNodes)
+    {
+        nodes = [delegateNodes copy];
+    }
+	for (GCDMulticastDelegateNode *node in nodes)
 	{
 		id nodeDelegate = node.delegate;
 		#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
@@ -280,7 +311,7 @@
 		NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] init];
 		
 		NSUInteger i = 0;
-		for (GCDMulticastDelegateNode *node in delegateNodes)
+		for (GCDMulticastDelegateNode *node in nodes)
 		{
 			id nodeDelegate = node.delegate;
 			#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
@@ -295,7 +326,10 @@
 			i++;
 		}
 		
-		[delegateNodes removeObjectsAtIndexes:indexSet];
+        @synchronized (delegateNodes)
+        {
+            [delegateNodes removeObjectsAtIndexes:indexSet];
+        }
 	}
 }
 
@@ -492,7 +526,7 @@ static BOOL SupportsWeakReferences(id delegate)
 {
 	if ((self = [super init]))
 	{
-		delegateNodes = [inDelegateNodes copy];
+        delegateNodes = [inDelegateNodes copy];
 		
 		numNodes = [delegateNodes count];
 		currentNodeIndex = 0;
@@ -509,7 +543,12 @@ static BOOL SupportsWeakReferences(id delegate)
 {
 	NSUInteger count = 0;
 	
-	for (GCDMulticastDelegateNode *node in delegateNodes)
+    NSArray *nodes;
+    @synchronized (delegateNodes)
+    {
+        nodes = [delegateNodes copy];
+    }
+	for (GCDMulticastDelegateNode *node in nodes)
 	{
 		id nodeDelegate = node.delegate;
 		#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
@@ -530,7 +569,12 @@ static BOOL SupportsWeakReferences(id delegate)
 {
 	NSUInteger count = 0;
 	
-	for (GCDMulticastDelegateNode *node in delegateNodes)
+    NSArray *nodes;
+    @synchronized (delegateNodes)
+    {
+        nodes = [delegateNodes copy];
+    }
+	for (GCDMulticastDelegateNode *node in nodes)
 	{
 		id nodeDelegate = node.delegate;
 		#if __has_feature(objc_arc_weak) && !TARGET_OS_IPHONE
@@ -551,7 +595,12 @@ static BOOL SupportsWeakReferences(id delegate)
 {
 	while (currentNodeIndex < numNodes)
 	{
-		GCDMulticastDelegateNode *node = [delegateNodes objectAtIndex:currentNodeIndex];
+		GCDMulticastDelegateNode *node;
+        
+        @synchronized (delegateNodes)
+        {
+            node = [delegateNodes objectAtIndex:currentNodeIndex];
+        }
 		currentNodeIndex++;
 		
 		id nodeDelegate = node.delegate; // snapshot atomic property
@@ -576,7 +625,12 @@ static BOOL SupportsWeakReferences(id delegate)
 {
 	while (currentNodeIndex < numNodes)
 	{
-		GCDMulticastDelegateNode *node = [delegateNodes objectAtIndex:currentNodeIndex];
+		GCDMulticastDelegateNode *node;
+        
+        @synchronized (delegateNodes)
+        {
+            node = [delegateNodes objectAtIndex:currentNodeIndex];
+        }
 		currentNodeIndex++;
 		
 		id nodeDelegate = node.delegate; // snapshot atomic property
@@ -601,7 +655,12 @@ static BOOL SupportsWeakReferences(id delegate)
 {
 	while (currentNodeIndex < numNodes)
 	{
-		GCDMulticastDelegateNode *node = [delegateNodes objectAtIndex:currentNodeIndex];
+		GCDMulticastDelegateNode *node;
+        
+        @synchronized (delegateNodes)
+        {
+            node = [delegateNodes objectAtIndex:currentNodeIndex];
+        }
 		currentNodeIndex++;
 		
 		id nodeDelegate = node.delegate; // snapshot atomic property
